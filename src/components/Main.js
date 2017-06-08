@@ -39,7 +39,7 @@ export default class MainSection extends Component {
   }
 
   renderFooter(completedCount) {
-    const { todos } = this.props
+    const { flights } = this.props
     const { filter } = this.state
     const activeCount = todos.length - completedCount
 
@@ -55,21 +55,21 @@ export default class MainSection extends Component {
   }
 
   render() {
-    const { todos, actions } = this.props
+    const { flight, actions } = this.props
     const { filter } = this.state
 
-    const filteredTodos = todos.filter(TODO_FILTERS[filter])
-    const completedCount = todos.reduce((count, todo) =>
-      todo.completed ? count + 1 : count,
+    const filteredTodos = flight.filter(FLIGHT_FILTERS[filter])
+    const completedCount = flight.reduce((count, todo) =>
+      flight.completed ? count + 1 : count,
       0
     )
 
     return (
       <section className="main">
         {this.renderToggleAll(completedCount)}
-        <ul className="todo-list">
-          {filteredTodos.map(todo =>
-            <TodoItem key={todo.id} todo={todo} {...actions} />
+        <ul className="Flights-list">
+          {filteredFlights.map(todo =>
+            <Item key={flight.id} flight={flight} {...actions} />
           )}
         </ul>
         {this.renderFooter(completedCount)}
