@@ -1,4 +1,4 @@
-import { ADD_FLIGHT, DELETE_FLIGHT, EDIT_FLIGHT, COMPLETE_FLIGHT, COMPLETE_ALL, CLEAR_COMPLETED } from '../constants/ActionTypes'
+import { ADD_FLIGHT, DELETE_FLIGHT, EDIT_FLIGHT, COMPLETE_FLIGHT } from '../constants/ActionTypes';
 
 const initialState = [
   {
@@ -45,16 +45,6 @@ export default function flights(state = initialState, action) {
           { ...flight, completed: !flight.completed } :
           flight
       )
-
-    case COMPLETE_ALL:
-      const areAllMarked = state.every(flight => flight.completed)
-      return state.map(flight => ({
-        ...flight,
-        completed: !areAllMarked
-      }))
-
-    case CLEAR_COMPLETED:
-      return state.filter(flight => flight.completed === false)
 
     default:
       return state
