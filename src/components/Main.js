@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Item from './TodoItem'
+import Item from './Item'
 import Footer from './Footer'
 import { SHOW_ALL, DEPARTURE_CITY, ARRIVAL_CITY } from '../constants/FlightFilters'
 
@@ -62,8 +62,8 @@ export default class Main extends Component {
     const { flight, actions } = this.props
     const { filter } = this.state
 
-    const filteredTodos = flight.filter(FLIGHT_FILTERS[filter])
-    const completedCount = flight.reduce((count, todo) =>
+    const filteredFlights = flight.filter(FLIGHT_FILTERS[filter])
+    const completedCount = flight.reduce((count, flight) =>
       flight.completed ? count + 1 : count,
       0
     )
@@ -72,7 +72,7 @@ export default class Main extends Component {
       <section className="main">
         {this.renderToggleAll(completedCount)}
         <ul className="Flights-list">
-          {filteredFlights.map(todo =>
+          {filteredFlights.map(flight =>
             <Item key={flight.id} flight={flight} {...actions} />
           )}
         </ul>
