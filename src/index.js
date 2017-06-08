@@ -1,14 +1,14 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import ButtonCont from './containers/buttonCont'
+import ButtonCont from './containers/App'
 import configureStore from './store'
 
 const store = configureStore();
 
 render (
   <Provider store={store}>
-    <ButtonCont />
+    <App />
   </Provider>,
   document.getElementById('root')
 ) 
