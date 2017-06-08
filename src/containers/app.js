@@ -9,7 +9,7 @@ import * as FlightActions from '../actions'
 const App = ({flights, actions}) => (
   <div>
     <Header addTodo={actions.addTodo} />
-    <MainSection todos={todos} actions={actions} />
+    <MainS flight={flight} actions={actions} />
   </div>
 );
 
