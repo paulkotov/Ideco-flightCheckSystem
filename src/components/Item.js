@@ -35,13 +35,29 @@ export default class Item extends Component {
     let element
     if (this.state.editing) {
       element = (
-        <div>
-          <TextInput text={flight.text.depCity} editing={this.state.editing} onSave={(text) => this.handleSave(flight.id, text.depCity)} />
-          <TextInput text={flight.text.arrCity} editing={this.state.editing} onSave={(text) => this.handleSave(flight.id, text.arrCity)} />
-          <TextInput text={flight.text.planeType} editing={this.state.editing} onSave={(text) => this.handleSave(flight.id, text.planeType)} />
-          <TextInput text={flight.text.time} editing={this.state.editing} onSave={(text) => this.handleSave(flight.id, text.time)} />
-          <TextInput text={flight.text.factTime} editing={this.state.editing} onSave={(text) => this.handleSave(flight.id, text.factTime)} />
-          <TextInput text={flight.text.state} editing={this.state.editing} onSave={(text) => this.handleSave(flight.id, text)} />
+        <div className="edit">
+          <TextInput text={flight.text.depCity} 
+                      editing={this.state.editing} 
+                      onSave={(text) => this.handleSave(flight.id, text.depCity)} 
+          /></br>
+          <TextInput text={flight.text.arrCity} 
+                      editing={this.state.editing} 
+                      onSave={(text) => this.handleSave(flight.id, text.arrCity)} 
+          /></br>
+          <TextInput text={flight.text.planeType} 
+                      editing={this.state.editing} 
+                      onSave={(text) => this.handleSave(flight.id, text.planeType)} 
+          /></br>
+          <TextInput text={flight.text.time} 
+                      editing={this.state.editing} 
+                      onSave={(text) => this.handleSave(flight.id, text.time)} 
+           /></br>
+          <TextInput text={flight.text.factTime} 
+                      editing={this.state.editing} 
+                      onSave={(text) => this.handleSave(flight.id, text.factTime)} /></br>
+          <TextInput text={flight.text.state} 
+                      editing={this.state.editing} 
+                      onSave={(text) => this.handleSave(flight.id, text.state)} />
         </div>
     );
     } else {
@@ -52,7 +68,14 @@ export default class Item extends Component {
                  checked={flight.completed}
                  onChange={() => completeFlight(flight.id)} />
           <label onDoubleClick={this.handleDoubleClick}>
-            {flight.text}
+            {`Flight Information: Departure: ${flight.text.depCity}, 
+                                  Arrival: ${flight.text.arrCity},
+                                  Plane: ${flight.text.planeType},
+                                  Time: ${flight.text.time},
+                                  FactTime: ${flight.text.factTime},
+                                  State: ${flight.text.state}
+            `}
+                                    
           </label>
           <button className="delete"
                   onClick={() => deleteFlight(flight.id)} />
