@@ -35,10 +35,15 @@ export default class Item extends Component {
     let element
     if (this.state.editing) {
       element = (
-        <TextInput text={flight.text}
-                       editing={this.state.editing}
-                       onSave={(text) => this.handleSave(flight.id, text)} />
-      )
+        <div>
+          <TextInput text={flight.text.depCity} editing={this.state.editing} onSave={(text) => this.handleSave(flight.id, text.depCity)} />
+          <TextInput text={flight.text.arrCity} editing={this.state.editing} onSave={(text) => this.handleSave(flight.id, text.arrCity)} />
+          <TextInput text={flight.text.planeType} editing={this.state.editing} onSave={(text) => this.handleSave(flight.id, text.planeType)} />
+          <TextInput text={flight.text.time} editing={this.state.editing} onSave={(text) => this.handleSave(flight.id, text.time)} />
+          <TextInput text={flight.text.factTime} editing={this.state.editing} onSave={(text) => this.handleSave(flight.id, text.factTime)} />
+          <TextInput text={flight.text.state} editing={this.state.editing} onSave={(text) => this.handleSave(flight.id, text)} />
+        </div>
+    );
     } else {
       element = (
         <div className="view">
