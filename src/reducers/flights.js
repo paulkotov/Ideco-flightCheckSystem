@@ -7,9 +7,10 @@ const initialState = [
       arrCity: 'Moscow',
       planeType: 'Airbus',
       time: '00:00',
-      factTime: '01:00'
+      factTime: '01:00',
+      state: 'delayed'
       },
-    state: false,
+    completed: false,
     id: 0
   }
 ]
