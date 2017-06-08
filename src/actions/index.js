@@ -1,8 +1,6 @@
 import * as types from '../constants/ActionTypes'
 
-export const addTodo = text => ({ type: types.ADD_TODO, text })
-export const deleteTodo = id => ({ type: types.DELETE_TODO, id })
-export const editTodo = (id, text) => ({ type: types.EDIT_TODO, id, text })
-export const completeTodo = id => ({ type: types.COMPLETE_TODO, id })
-export const completeAll = () => ({ type: types.COMPLETE_ALL })
-export const clearCompleted = () => ({ type: types.CLEAR_COMPLETED })
+export const addFlight = text => ({ type: types.ADD_FLIGHT, text });
+export const deleteFlight = id => ({ type: types.DELETE_FLIGHT, id });
+export const editFlight = (id, text) => ({ type: types.EDIT_FLIGHT, id, text });
+export const completeFlight = id => ({ type: types.COMPLETE_FLIGHT, id });
