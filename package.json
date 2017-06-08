@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "description": "react-redux",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/driventa/front.git"
+  },
+  "engines": {
+    "node": "7.2.0",
+    "npm": "3.10.10"
+  },
   "scripts": {
     "start": "node server.js",
     "build": "npm webpack"
