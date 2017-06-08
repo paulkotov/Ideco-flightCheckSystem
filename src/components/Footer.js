@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+timport React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/FlightFilters'
+import { SHOW_ALL, DEPARTURE_CITY, ARRIVAL_CITY } from '../constants/FlightFilters'
 
 const FILTER_TITLES = {
   [SHOW_ALL]: 'All',
-  [DEPARTURE_CITY]: 'Active',
-  [ARRIVAL_CITY]: 'Completed'
+  [DEPARTURE_CITY]: 'Departure city',
+  [ARRIVAL_CITY]: 'Arrival city'
 }
 
 export default class Footer extends Component {
@@ -23,7 +23,7 @@ export default class Footer extends Component {
     const itemWord = activeCount === 1 ? 'item' : 'items'
 
     return (
-      <span className="todo-count">
+      <span className="flights-count">
         <strong>{activeCount || 'No'}</strong> {itemWord} left
       </span>
     )
@@ -36,37 +36,4 @@ export default class Footer extends Component {
     return (
       <a className={classnames({ selected: filter === selectedFilter })}
          style={{ cursor: 'pointer' }}
-         onClick={() => onShow(filter)}>
-        {title}
-      </a>
-    )
-  }
-
-  renderClearButton() {
-    const { completedCount, onClearCompleted } = this.props
-    if (completedCount > 0) {
-      return (
-        <button className="clear-completed"
-                onClick={onClearCompleted} >
-          Clear completed
-        </button>
-      )
-    }
-  }
-
-  render() {
-    return (
-      <footer className="footer">
-        {this.renderTodoCount()}
-        <ul className="filters">
-          {[ SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED ].map(filter =>
-            <li key={filter}>
-              {this.renderFilterLink(filter)}
-            </li>
-          )}
-        </ul>
-        {this.renderClearButton()}
-      </footer>
-    )
-  }
-} 
+         
