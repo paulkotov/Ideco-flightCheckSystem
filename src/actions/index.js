@@ -1,4 +1,4 @@
-import * as types from '../constants/ActionTypes'
+import * as types from '../constants/FlightActions'
 
 export const addFlight = text => ({ type: types.ADD_FLIGHT, text });
 export const deleteFlight = id => ({ type: types.DELETE_FLIGHT, id });
