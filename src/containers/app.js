@@ -19,7 +19,7 @@ App.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  todos: state.flights
+  flights: state.flights
 });
 
 const mapDispatchToProps = dispatch => ({
