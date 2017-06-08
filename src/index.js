@@ -1,12 +1,14 @@
-import react from 'react';
-import { Provider } from 'redux';
-import { configureStore } from './store';
-import { render } from 'react-dom-render';
-import App from './containers/index.js';
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import ButtonCont from './containers/buttonCont'
+import configureStore from './store'
 
-render(
-    <Provider store={configureStore}>
-        <App/>
-    </Provider>,
-    document.getElementById('root')
-)
+const store = configureStore();
+
+render (
+  <Provider store={store}>
+    <ButtonCont />
+  </Provider>,
+  document.getElementById('root')
+) 
