@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import TextInput from './TextInput'
+import InfoInput from './InfoInput'
 
 export default class Header extends Component {
   static propTypes = {
@@ -17,7 +17,7 @@ export default class Header extends Component {
     return (
       <header className="header">
         <h1>Flight panel information</h1>
-        <TextInput newFlight
+        <InfoInput newFlight
                        onSave={this.handler}
                        placeholder="Please enter your flight information" />
       </header>
