@@ -1,10 +1,10 @@
 import * as types from '../constants/ActionTypes'
 import * as actions from './index'
 
-describe('todo actions', () => {
-  it('addTodo should create ADD_TODO action', () => {
-    expect(actions.addTodo('Use Redux')).toEqual({
-      type: types.ADD_TODO,
+describe('flight actions', () => {
+  it('addTodo should create ADD_FLIGHT action', () => {
+    expect(actions.addFlight('Use Redux')).toEqual({
+      type: types.ADD_FLIGHT,
       text: 'Use Redux'
     })
   })
