@@ -8,8 +8,8 @@ import * as FlightActions from '../actions'
 
 const App = ({flights, actions}) => (
   <div>
-    <Header addTodo={actions.addTodo} />
-    <Main flight={flight} actions={actions} />
+    <Header addFlight={actions.addFlight} />
+    <Main flights={flights} actions={actions} />
   </div>
 );
 
@@ -19,7 +19,7 @@ App.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  todos: state.todos
+  todos: state.flights
 });
 
 const mapDispatchToProps = dispatch => ({
