@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import TextInput from './TodoTextInput'
+import InfoInput from './InfoTextInput'
 
 export default class Item extends Component {
   static propTypes = {
@@ -50,7 +50,7 @@ export default class Item extends Component {
             {flight.text}
           </label>
           <button className="delete"
-                  onClick={() => deleteFlight(todo.id)} />
+                  onClick={() => deleteFlight(flight.id)} />
         </div>
       )
     }
