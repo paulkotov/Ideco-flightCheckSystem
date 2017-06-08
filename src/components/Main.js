@@ -1,23 +1,27 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Item from './TodoItem'
-//import Footer from './Footer'
-import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/FlightFilters'
+import Footer from './Footer'
+import { SHOW_ALL, DEPARTURE_CITY, ARRIVAL_CITY } from '../constants/FlightFilters'
 
 const FLIGHT_FILTERS = {
   [SHOW_ALL]: () => true,
-  [SHOW_ACTIVE]: flight => !flight.completed,
-  [SHOW_COMPLETED]: flight => flight.completed
+  [DEPARTURE_CITY]: flight => flight.text.depCity,
+  [ARRIVAL_CITY]: flight => flight.text.arrCity
 }
 
-export default class MainSection extends Component {
+export default class Main extends Component {
   static propTypes = {
     flights: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
   }
-
-  state = { filter: SHOW_ALL }
-
+  
+ constructor(){
+  this.state = { 
+    filter: SHOW_ALL 
+  };
+}
+  
   handleClearCompleted = () => {
     this.props.actions.clearCompleted()
   }
@@ -41,9 +45,9 @@ export default class MainSection extends Component {
   renderFooter(completedCount) {
     const { flights } = this.props
     const { filter } = this.state
-    const activeCount = todos.length - completedCount
+    const activeCount = flight.length - completedCount
 
-    if (todos.length) {
+    if (flight.length) {
       return (
         <Footer completedCount={completedCount}
                 activeCount={activeCount}
