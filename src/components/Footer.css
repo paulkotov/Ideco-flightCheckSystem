@@ -1,0 +1,11 @@
+.filters li{
+    display: inline-block;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-bottom-color: beige;
+    position: right;
+}
+
+.filters li:hover {
+    border-bottom-color: grey;
+
+}

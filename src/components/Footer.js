@@ -1,7 +1,8 @@
-timport React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
-import { SHOW_ALL, DEPARTURE_CITY, ARRIVAL_CITY } from '../constants/FlightFilters'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import { SHOW_ALL, DEPARTURE_CITY, ARRIVAL_CITY } from '../constants/FlightFilters';
+import './Footer.css';
 
 const FILTER_TITLES = {
   [SHOW_ALL]: 'All',
@@ -20,11 +21,11 @@ export default class Footer extends Component {
 
   renderFlightCount() {
     const { activeCount } = this.props
-    const itemWord = activeCount === 1 ? 'item' : 'items'
+    const itemWord = activeCount === 1 ? 'flight found' : 'flights found'
 
     return (
       <span className="flights-count">
-        <strong>{activeCount || 'No'}</strong> {itemWord} left
+        <strong>{activeCount || 'No'}</strong> {itemWord}
       </span>
     )
   }
@@ -57,7 +58,8 @@ renderFilterLink(filter) {
   render() {
     return (
       <footer className="footer">
-        {this.renderTodoCount()}
+        {this.renderFlightCount()}
+        <br/>Select filter 
         <ul className="filters">
           {[ SHOW_ALL, DEPARTURE_CITY, ARRIVAL_CITY ].map(filter =>
             <li key={filter}>

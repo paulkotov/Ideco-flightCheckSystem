@@ -1,0 +1,12 @@
+.view{
+    background-color: #FFFFCC;
+    display: inline-block;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.edit{
+    display: inline-block;
+    border-left-style: groove;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-bottom-color: beige;
+}

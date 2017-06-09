@@ -1,0 +1,11 @@
+.title{
+    text-align: center;
+    background-color: whitesmoke;
+}
+
+.header{
+    display: inline-block;
+    border-left-style: groove;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-bottom-color: beige;
+}

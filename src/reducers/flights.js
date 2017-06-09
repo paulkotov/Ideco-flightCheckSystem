@@ -1,8 +1,9 @@
-import { ADD_FLIGHT, DELETE_FLIGHT, EDIT_FLIGHT, COMPLETE_FLIGHT } from '../constants/ActionTypes';
+import { ADD_FLIGHT, DELETE_FLIGHT, EDIT_FLIGHT, COMPLETE_FLIGHT } from '../constants/FlightTypes';
+
 
 const initialState = [
   {
-    text: {
+    data: {
       depCity: 'Ekaterinburg',
       arrCity: 'Moscow',
       planeType: 'Airbus',
@@ -13,7 +14,7 @@ const initialState = [
     completed: false,
     id: 0
   }
-]
+];
 
 export default function flights(state = initialState, action) {
   switch (action.type) {
@@ -22,7 +23,7 @@ export default function flights(state = initialState, action) {
         {
           id: state.reduce((maxId, flight) => Math.max(flight.id, maxId), -1) + 1,
           completed: false,
-          text: action.text
+          data: action.data
         },
         ...state
       ]
@@ -35,7 +36,7 @@ export default function flights(state = initialState, action) {
     case EDIT_FLIGHT:
       return state.map(flight =>
         flight.id === action.id ?
-          { ...flight, text: action.text } :
+          { ...flight, data: action.data } :
           flight
       )
 

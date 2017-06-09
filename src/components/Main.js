@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import Item from './Item'
-import Footer from './Footer'
-import { SHOW_ALL, DEPARTURE_CITY, ARRIVAL_CITY } from '../constants/FlightFilters'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Item from './Item';
+import Footer from './Footer';
+import { SHOW_ALL, DEPARTURE_CITY, ARRIVAL_CITY } from '../constants/FlightFilters';
 
 const FLIGHT_FILTERS = {
   [SHOW_ALL]: () => true,
-  [DEPARTURE_CITY]: flight => flight.text.depCity,
-  [ARRIVAL_CITY]: flight => flight.text.arrCity
+  [DEPARTURE_CITY]: flight => flight.data.depCity,
+  [ARRIVAL_CITY]: flight => flight.data.arrCity
 }
 
 export default class Main extends Component {
@@ -16,7 +16,8 @@ export default class Main extends Component {
     actions: PropTypes.object.isRequired
   }
   
- constructor(){
+ constructor(props){
+  super(props);
   this.state = { 
     filter: SHOW_ALL 
   };
@@ -45,9 +46,9 @@ export default class Main extends Component {
   renderFooter(completedCount) {
     const { flights } = this.props
     const { filter } = this.state
-    const activeCount = flight.length - completedCount
+    const activeCount = flights.length - completedCount
 
-    if (flight.length) {
+    if (flights.length) {
       return (
         <Footer completedCount={completedCount}
                 activeCount={activeCount}
@@ -59,11 +60,11 @@ export default class Main extends Component {
   }
 
   render() {
-    const { flight, actions } = this.props
+    const { flights, actions } = this.props
     const { filter } = this.state
 
-    const filteredFlights = flight.filter(FLIGHT_FILTERS[filter])
-    const completedCount = flight.reduce((count, flight) =>
+    const filteredFlights = flights.filter(FLIGHT_FILTERS[filter])
+    const completedCount = flights.reduce((count, flight) =>
       flight.completed ? count + 1 : count,
       0
     )

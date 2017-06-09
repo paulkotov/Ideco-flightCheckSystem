@@ -5,15 +5,16 @@ import classnames from 'classnames'
 export default class InfoInput extends Component {
   static propTypes = {
     onSave: PropTypes.func.isRequired,
-    text: PropTypes.object,
+    text: PropTypes.string,
     placeholder: PropTypes.string,
     editing: PropTypes.bool,
     newFlight: PropTypes.bool
   }
   
-  constructor(){
-    state = {
-      text: this.props.text || []
+  constructor(props){
+    super(props);
+    this.state = {
+      text: this.props.text || ''
     }
   }
   
@@ -21,7 +22,7 @@ export default class InfoInput extends Component {
     const text = e.target.value.trim()
     if (e.which === 13) {
       this.props.onSave(text)
-      if (this.props.newTodo) {
+      if (this.props.newFlight) {
         this.setState({ text: '' })
       }
     }
@@ -32,7 +33,7 @@ export default class InfoInput extends Component {
   }
 
   handleBlur = e => {
-    if (!this.props.newTodo) {
+    if (!this.props.newFlight) {
       this.props.onSave(e.target.value)
     }
   }

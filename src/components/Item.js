@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
-import InfoInput from './InfoTextInput'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import InfoInput from './InfoInput';
+import './Item.css';
 
 export default class Item extends Component {
   static propTypes = {
@@ -9,12 +10,22 @@ export default class Item extends Component {
     editFlight: PropTypes.func.isRequired,
     deleteFlight: PropTypes.func.isRequired,
     completeFlight: PropTypes.func.isRequired
-  }
-    constructor(){
+  };
+  
+    constructor(props){
+    super(props);  
     this.state = {
-      editing: false
+        editing: false,
+          text: {
+          depCity: '',
+          arrCity: '',
+          planeType: '',
+          time: '',
+          factTime: '',
+          state: ''
+        }
     }
-   }
+   };
 
   handleDoubleClick = () => {
     this.setState({ editing: true })
@@ -32,32 +43,32 @@ export default class Item extends Component {
   render() {
     const { flight, completeFlight, deleteFlight } = this.props
 
-    let element
+    let element;
     if (this.state.editing) {
       element = (
         <div className="edit">
-          <TextInput text={flight.text.depCity} 
+          <InfoInput text={flight.data.depCity} 
                       editing={this.state.editing} 
-                      onSave={(text) => this.handleSave(flight.id, text.depCity)} 
-          /></br>
-          <TextInput text={flight.text.arrCity} 
+                      onSave={(text) => this.handleSave(flight.id, flight.data.depCity)} 
+          /><br/>
+          <InfoInput text={flight.data.arrCity} 
                       editing={this.state.editing} 
-                      onSave={(text) => this.handleSave(flight.id, text.arrCity)} 
-          /></br>
-          <TextInput text={flight.text.planeType} 
+                      onSave={(text) => this.handleSave(flight.id, flight.data.arrCity)} 
+          /><br/>
+          <InfoInput text={flight.data.planeType} 
                       editing={this.state.editing} 
-                      onSave={(text) => this.handleSave(flight.id, text.planeType)} 
-          /></br>
-          <TextInput text={flight.text.time} 
+                      onSave={(text) => this.handleSave(flight.id, flight.data.planeType)} 
+          /><br/>
+          <InfoInput text={flight.data.time} 
                       editing={this.state.editing} 
-                      onSave={(text) => this.handleSave(flight.id, text.time)} 
-           /></br>
-          <TextInput text={flight.text.factTime} 
+                      onSave={(text) => this.handleSave(flight.id, flight.data.time)} 
+           /><br/>
+          <InfoInput text={flight.data.factTime} 
                       editing={this.state.editing} 
-                      onSave={(text) => this.handleSave(flight.id, text.factTime)} /></br>
-          <TextInput text={flight.text.state} 
+                      onSave={(text) => this.handleSave(flight.id, flight.data.factTime)} /><br/>
+          <InfoInput text={flight.text.state} 
                       editing={this.state.editing} 
-                      onSave={(text) => this.handleSave(flight.id, text.state)} />
+                      onSave={(text) => this.handleSave(flight.id, flight.data.state)} />
         </div>
     );
     } else {
@@ -68,17 +79,17 @@ export default class Item extends Component {
                  checked={flight.completed}
                  onChange={() => completeFlight(flight.id)} />
           <label onDoubleClick={this.handleDoubleClick}>
-            {`Flight Information: Departure: ${flight.text.depCity}, 
-                                  Arrival: ${flight.text.arrCity},
-                                  Plane: ${flight.text.planeType},
-                                  Time: ${flight.text.time},
-                                  FactTime: ${flight.text.factTime},
-                                  State: ${flight.text.state}
-            `}
-                                    
+            {`Flight Information: FlightID: ${flight.id},
+                                  Departure: ${flight.data.depCity}, 
+                                  Arrival: ${flight.data.arrCity},
+                                  Plane: ${flight.data.planeType},
+                                  Time: ${flight.data.time},
+                                  FactTime: ${flight.data.factTime},
+                                  State: ${flight.data.state}
+            `}                  
           </label>
-          <button className="delete"
-                  onClick={() => deleteFlight(flight.id)} />
+          <button className="delete" 
+                  onClick={() => deleteFlight(flight.id)} >Delete</button>
         </div>
       )
     }
