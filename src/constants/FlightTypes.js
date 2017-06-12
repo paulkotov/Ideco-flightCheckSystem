@@ -1,5 +1,5 @@
 export const ADD_FLIGHT = 'ADD_FLIGHT';
 export const DELETE_FLIGHT = 'DELETE_FLIGHT';
-export const EDIT_FLIGHT = 'EDIT_TODO';
+export const EDIT_FLIGHT = 'EDIT_FLIGHT';
 export const COMPLETE_FLIGHT = 'COMPLETE_FLIGHT';
 export const CLEAR_COMPLETED = 'CLEAR_COMPLETED';

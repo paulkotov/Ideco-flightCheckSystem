@@ -23,7 +23,7 @@ export default function flights(state = initialState, action) {
         {
           id: state.reduce((maxId, flight) => Math.max(flight.id, maxId), -1) + 1,
           completed: false,
-          data: action.data
+          data: action.payload
         },
         ...state
       ]
@@ -33,16 +33,18 @@ export default function flights(state = initialState, action) {
         flight.id !== action.id
       )
 
-    case EDIT_FLIGHT:
+    case EDIT_FLIGHT: 
+      console.log(action.id, action.data)
       return state.map(flight =>
-        flight.id === action.id ?
+        flight.id === action.id ? 
           { ...flight, data: action.data } :
           flight
-      )
+      );
+
 
     case COMPLETE_FLIGHT:
       return state.map(flight =>
-        flight.id === action.id ?
+        flight.id === action.payload.id ?
           { ...flight, completed: !flight.completed } :
           flight
       )

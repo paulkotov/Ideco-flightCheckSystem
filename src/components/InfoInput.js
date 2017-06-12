@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 export default class InfoInput extends Component {
   static propTypes = {
-    onSave: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
     text: PropTypes.string,
+    name: PropTypes.string,
     placeholder: PropTypes.string,
     editing: PropTypes.bool,
     newFlight: PropTypes.bool
@@ -32,12 +33,6 @@ export default class InfoInput extends Component {
     this.setState({ text: e.target.value })
   }
 
-  handleBlur = e => {
-    if (!this.props.newFlight) {
-      this.props.onSave(e.target.value)
-    }
-  }
-
   render() {
     return (
       <input className={
@@ -46,10 +41,9 @@ export default class InfoInput extends Component {
           'newflight': this.props.newFlight
         })}
         type="text"
+        name={this.props.name}
         placeholder={this.props.placeholder}
-        autoFocus="true"
         value={this.state.text}
-        onBlur={this.handleBlur}
         onChange={this.handleChange}
         onKeyDown={this.handleSubmit} />
     )

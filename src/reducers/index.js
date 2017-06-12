@@ -5,4 +5,4 @@ const rootReducer = combineReducers({
   flights
 });
 
-export default rootReducer 
+export default rootReducer ;

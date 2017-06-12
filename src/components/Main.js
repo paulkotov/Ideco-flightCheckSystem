@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Item from './Item';
 import Footer from './Footer';
-import { SHOW_ALL, DEPARTURE_CITY, ARRIVAL_CITY } from '../constants/FlightFilters';
+//import { SHOW_ALL, CITY_FILTER } from '../constants/FilterTypes';
 
-const FLIGHT_FILTERS = {
-  [SHOW_ALL]: () => true,
-  [DEPARTURE_CITY]: flight => flight.data.depCity,
-  [ARRIVAL_CITY]: flight => flight.data.arrCity
-}
+// const FILTERS = {
+//   [SHOW_ALL] : () => true,
+//   [CITY_FILTER] : flight => flight.data.depCity
+// };
 
 export default class Main extends Component {
   static propTypes = {
@@ -16,10 +15,11 @@ export default class Main extends Component {
     actions: PropTypes.object.isRequired
   }
   
- constructor(props){
-  super(props);
+ constructor(){
+  super();
   this.state = { 
-    filter: SHOW_ALL 
+    filter: 'SHOW_ALL',
+    city: '' 
   };
 }
   
@@ -28,7 +28,9 @@ export default class Main extends Component {
   }
 
   handleShow = filter => {
-    this.setState({ filter })
+    this.setState({ 
+      filter: 'CITY', 
+      city: filter })
   }
 
   renderToggleAll(completedCount) {
@@ -44,33 +46,50 @@ export default class Main extends Component {
   }
 
   renderFooter(completedCount) {
-    const { flights } = this.props
-    const { filter } = this.state
-    const activeCount = flights.length - completedCount
+    const { flights } = this.props;
+    const { city } = this.state;
+    //const {filterFlightsByCity} = actions.filterFlightsByCity;
+    const activeCount = flights.length - completedCount;
 
     if (flights.length) {
       return (
         <Footer completedCount={completedCount}
                 activeCount={activeCount}
-                filter={filter}
+                filter={city}
                 onClearCompleted={this.handleClearCompleted}
                 onShow={this.handleShow} />
       )
     }
   }
+    
+  resetFilter = () => {
+    this.setState({
+      filter: 'SHOW_ALL',
+      city: ''
+    });
+  }
 
   render() {
-    const { flights, actions } = this.props
-    const { filter } = this.state
+    const { flights, actions } = this.props;
+//  const { filter } = this.state;
+    const filteredFlights = flights.filter((elem) => {
+      switch(this.state.filter){     
+        case 'CITY': 
+          console.log(elem.data.depCity);
+          return ((elem.data.depCity || elem.data.arrCity) === this.state.city) ? true : false;
 
-    const filteredFlights = flights.filter(FLIGHT_FILTERS[filter])
+        default:
+          return true;
+      }
+     }); 
     const completedCount = flights.reduce((count, flight) =>
       flight.completed ? count + 1 : count,
       0
-    )
+    );
 
     return (
       <section className="main">
+        <hr/>
         {this.renderToggleAll(completedCount)}
         <ul className="Flights-list">
           {filteredFlights.map(flight =>
@@ -78,6 +97,7 @@ export default class Main extends Component {
           )}
         </ul>
         {this.renderFooter(completedCount)}
+        <button onClick={this.resetFilter}> Reset </button>
       </section>
     )
   }

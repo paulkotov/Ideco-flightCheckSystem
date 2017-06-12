@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import { SHOW_ALL, DEPARTURE_CITY, ARRIVAL_CITY } from '../constants/FlightFilters';
+import InfoInput from './InfoInput';
+//import classnames from 'classnames';
+//import { SHOW_ALL, DEPARTURE_CITY, ARRIVAL_CITY } from '../constants/FlightFilters';
 import './Footer.css';
 
-const FILTER_TITLES = {
-  [SHOW_ALL]: 'All',
-  [DEPARTURE_CITY]: 'Departure city',
-  [ARRIVAL_CITY]: 'Arrival city'
-}
 
 export default class Footer extends Component {
   static propTypes = {
@@ -19,6 +15,12 @@ export default class Footer extends Component {
     onShow: PropTypes.func.isRequired
   }
 
+  constructor(){
+    super()
+    this.state = {
+      cityFilter: ''
+    };
+  }
   renderFlightCount() {
     const { activeCount } = this.props
     const itemWord = activeCount === 1 ? 'flight found' : 'flights found'
@@ -29,45 +31,30 @@ export default class Footer extends Component {
       </span>
     )
   }
-  
-renderFilterLink(filter) {
-    const title = FILTER_TITLES[filter]
-    const { filter: selectedFilter, onShow } = this.props
-
-    return (
-      <a className={classnames({ selected: filter === selectedFilter })}
-         style={{ cursor: 'pointer' }}
-         onClick={() => onShow(filter)}>
-        {title}
-      </a>
-    )
+    onFieldChange = (fieldName, e) => {
+    if (e.target.value.trim().length > 0) {
+      this.setState({ [''+fieldName]: e.target.value.trim() });
+    } 
   }
 
-  renderClearButton() {
-    const { completedCount, onClearCompleted } = this.props
-    if (completedCount > 0) {
-      return (
-        <button className="clear-completed"
-                onClick={onClearCompleted} >
-          Clear completed
-        </button>
-      )
-    }
-  }
+  onBtnClickHandler = e => {
+    e.preventDefault();
+    const {onShow} = this.props;
+    onShow(this.CityFilterInput.state.text);
+}
 
   render() {
     return (
       <footer className="footer">
         {this.renderFlightCount()}
-        <br/>Select filter 
-        <ul className="filters">
-          {[ SHOW_ALL, DEPARTURE_CITY, ARRIVAL_CITY ].map(filter =>
-            <li key={filter}>
-              {this.renderFilterLink(filter)}
-            </li>
-          )}
-        </ul>
-        {this.renderClearButton()}
+        <hr/>
+        <br/>City filter: 
+        <InfoInput type="text" 
+                ref={input => this.CityFilterInput = input}
+                onChange={this.onFieldChange.bind(this, 'CityFilterIsEmpty')}
+                placeholder="Enter city" />{' '}
+        <button className="Set Filter" 
+                      onClick={this.onBtnClickHandler}> Set </button>   
       </footer>
     )
   }

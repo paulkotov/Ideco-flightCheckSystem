@@ -1,8 +1,18 @@
-.filters li{
+.footer{
     display: inline-block;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    border-bottom-color: beige;
-    position: right;
+    left: 500px;
+}
+
+.filters {
+    display: inline-block;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    left: 500px;
+}
+
+.filters li{
+    display: inline-block;
+    background-color:  beige;
 }
 
 .filters li:hover {
